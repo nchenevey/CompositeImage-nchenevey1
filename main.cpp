@@ -17,8 +17,19 @@ int main()
   */
 
   //PUT YOUR CODE BELOW THIS LINE
-  
-  
+  int rows = wordGrid.size ();
+  int cols = wordGrid[0].size ();
+  int rowIndex = 0;
+  int colIndex = 0;
+  while (int index =0; index < rows; index++;)
+  {
+    cout << "Row " <<Index+1 << " Column " << colIndex+1 << " is: " << wordGrid [Index][colIndex]<<endl;
+  }
+  while (int columnIndex = 0; columnIndex < cols; columnIndex++;)
+  {
+    cout << "Row " <<rowIndex+1 << " Column " << columnIndex+1 << "is: " <<wordGrid [rowIndex][columnIndex]<<endl;
+    
+  }
   
   
   //that prints each element of the matrix in the

@@ -13,7 +13,7 @@ vector< vector <int> > instaResize( vector< vector <int> >, vector< vector <Pixe
 vector< vector <Pixel> > pixelResize( vector< vector <Pixel> >, vector< vector <Pixel> >);
 
 //Accepts a vector of bitmap file names and combines them into a matrix
-vector< vector <Pixel> > rgbAverages(vector <string> );
+vector< vector <Pixel> > rgbAverages(int, int, vector <string> );
 
 //Prints a progress update if the current image is successfully combined
 void progress(bool);
@@ -55,20 +55,11 @@ cols1 = pmb[0].size();
 cocoa[0] = sweet;
 vector<string> test1;
 
-test1 = askUser(rows1, cols1, cocoa );
-cout<<"Test 1 complete"<<endl;
 
-vector< vector <Pixel> > test2;
-test2 = rgbAverages(test1);
-cout<<"Test 2 complete"<<endl;
+image.fromPixelMatrix( rgbAverages(rows1, cols1, askUser(rows1, cols1, cocoa) ));
 
-image.fromPixelMatrix( test2 );
 image.save("composite-nchenevey1.bmp");
 
-/*
-image.fromPixelMatrix( rgbAverages( askUser( rows1, cols1, cocoa ) ) );
-image.save("composite-nchenevey1.bmp");
-*/
 
 
 
@@ -116,40 +107,59 @@ vector<string> askUser(int height, int width, vector<string> pumpkin)
     }
 
     }while(temper != "DONE" && temper != "done" && pumpkin.size() < 10 );
+    
+
 return pumpkin;
 }
 
 
-vector< vector <Pixel> > rgbAverages(vector <string> namae)
+vector< vector <Pixel> > rgbAverages(int height, int width, vector <string> namae)
 {  
     vector< vector <int> > temporalRed;
     vector< vector <int> > temporalGreen;
     vector< vector <int> > temporalBlue;
 
-    Bitmap pic;
-
     vector< vector <Pixel> > bmp;
     vector< vector <Pixel> > neko;
-
-    temporalRed = instaResize(temporalRed, bmp);
-    temporalGreen = instaResize(temporalGreen, bmp);
-    temporalBlue = instaResize(temporalBlue, bmp);
     
-    neko = pixelResize(neko, bmp);
+
+    Bitmap pic;
+    
+
+    for(int box = 0; box < height; box++)
+    {
+    temporalRed.resize( height );
+    temporalGreen.resize( height );
+    temporalBlue.resize( height );
+    neko.resize( height );
+        for(int boxbox = 0; boxbox < width; boxbox++)
+        {
+        temporalRed[box].resize( width );
+        temporalGreen[box].resize( width );
+        temporalBlue[box].resize( width );
+        neko[box].resize( width );
+        }
+    }
 
     Pixel rgb;
+    
     for(int i = 0; i < namae.size(); i++)
     {
         pic.open(namae[i]);
         bmp = pic.toPixelMatrix();
-        for(int rows = 0; rows < bmp.size(); rows++)
+
+        
+
+        for(int rows = 0; rows < height; rows++)
         {
-            for(int cols = 0; cols < bmp[0].size(); cols++)
+            for(int cols = 0; cols < width; cols++)
             {
               rgb = bmp[rows][cols];
+              
               temporalRed[rows][cols] = temporalRed[rows][cols] + rgb.red;
               temporalGreen[rows][cols] = temporalGreen[rows][cols] + rgb.green;
               temporalBlue[rows][cols] = temporalBlue[rows][cols] + rgb.blue;
+              
               /*
               rgb.red = temporalRed[rows][cols];
               rgb.green = temporalGreen[rows][cols];
@@ -158,20 +168,28 @@ vector< vector <Pixel> > rgbAverages(vector <string> namae)
               */
             }
         }
-    cout<<"Image "<<i<<" of "<<(namae.size()-1)<<" done."<<endl;
-    }
+
+    cout<<"Image "<<(i+1)<<" of "<<(namae.size())<<" done."<<endl;
+  
+  
+   }
+    
 
     for(int r = 0; r < neko.size(); r++)
     {
         for(int c = 0; c < neko[0].size(); c++)
         {
         rgb = neko[r][c];
+        
         rgb.red = (temporalRed[r][c]/namae.size());
         rgb.green = (temporalGreen[r][c]/namae.size());
         rgb.blue = (temporalBlue[r][c]/namae.size());
+        
         neko[r][c] = rgb;
         }
     }
+    
+
 return neko;
 }
 
@@ -203,6 +221,7 @@ for(int box = 0; box < juliet.size(); box++)
         romeo[box].resize(temptress);
     }
 }
+return romeo;
 }
 
 

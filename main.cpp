@@ -175,11 +175,11 @@ vector< vector <Pixel> > rgbAverages(int height, int width, vector <string> nama
                         for(int cols = 0; cols < width; cols++)
                         {
                                 rgb = bmp[rows][cols];
-
+                                
+                                
                                 temporalRed[rows][cols] = temporalRed[rows][cols] + rgb.red;
                                 temporalGreen[rows][cols] = temporalGreen[rows][cols] + rgb.green;
                                 temporalBlue[rows][cols] = temporalBlue[rows][cols] + rgb.blue;
-
                         }
                 }
                 /*
@@ -199,7 +199,7 @@ vector< vector <Pixel> > rgbAverages(int height, int width, vector <string> nama
                         rgb.red = (temporalRed[r][c]/namae.size());
                         rgb.green = (temporalGreen[r][c]/namae.size());
                         rgb.blue = (temporalBlue[r][c]/namae.size());
-
+                        
                         neko[r][c] = rgb;
                 }
         }
